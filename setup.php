@@ -1,49 +1,50 @@
-
-?>
 <?php
-// Washa ripoti ya makosa ili tuone shida iko wapi
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require_once 'config/db.php';
 
-echo "<h1>🛠️ Mchakato wa Kurekebisha Database</h1>";
+echo "<h2>🛠️ Tunaongeza Tables Zilizokosekana...</h2>";
 
-// Jaribu kuunganisha kwa kutumia faili la config
-if (!file_exists('config/db.php')) {
-    die("❌ Kosa: Faili la config/db.php halionekani! Hakikisha umelitengeneza.");
-}
-
-include 'config/db.php';
-
-// Hakikisha connection ipo
-if ($conn->connect_error) {
-    die("❌ Connection Failed: " . $conn->connect_error);
-}
-echo "✅ Connection imekubali! <br>";
-
-// SQL ya kutengeneza Table ya Users
+// 1. Users (Hii ipo, lakini tunahakikisha)
 $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM('admin', 'teacher', 'student') NOT NULL
-)";
+);";
+$conn->query($sql);
+
+// 2. COURSES (Hii ndiyo iliyolalamika 'Doesn't exist')
+$sql = "CREATE TABLE IF NOT EXISTS courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_code VARCHAR(50) NOT NULL UNIQUE,
+    teacher_id INT
+);";
+$conn->query($sql);
+
+// 3. STUDENTS (Wanafunzi)
+$sql = "CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    reg_number VARCHAR(50) NOT NULL UNIQUE
+);";
+$conn->query($sql);
+
+// 4. ATTENDANCE (Mahudhurio)
+$sql = "CREATE TABLE IF NOT EXISTS attendance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    course_id INT,
+    status ENUM('Present', 'Absent', 'Excused'),
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);";
 
 if ($conn->query($sql) === TRUE) {
-    echo "✅ Table 'users' imetengenezwa.<br>";
-    
-    // Weka Admin
-    $pass = password_hash('admin123', PASSWORD_DEFAULT);
-    $check = $conn->query("SELECT id FROM users WHERE username='admin'");
-    if ($check->num_rows == 0) {
-        $conn->query("INSERT INTO users (username, password, role) VALUES ('admin', '$pass', 'admin')");
-        echo "✅ Admin ameongezwa (User: admin, Pass: admin123).<br>";
-    } else {
-        echo "ℹ️ Admin yupo tayari.<br>";
-    }
+    echo "<h1>✅ Tables zote (Courses, Students, Attendance) zimewekwa!</h1>";
+    echo "<h3><a href='index.php'>BOFYA HAPA KUINGIA (LOGIN)</a></h3>";
 } else {
-    echo "❌ Imeshindikana kutengeneza table: " . $conn->error . "<br>";
+    echo "❌ Kosa: " . $conn->error;
 }
-
-echo "<hr><h3>🎉 Kila kitu tayari! <a href='index.php'>Bofya hapa uka-Login</a></h3>";
 ?>
+
