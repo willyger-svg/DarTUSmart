@@ -1,0 +1,329 @@
+/* css/style.css */
+
+/* 1. KUSAFISHA KILA KITU (Reset) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2. RANGI ZETU MAALUM (Variables) */
+:root {
+    --primary-color: #0d47a1; /* Royal Blue */
+    --secondary-color: #1976d2; /* Lighter Blue */
+    --accent-color: #ffca28; /* Yellow for highlights */
+    --bg-color: #f0f2f5;
+    --text-dark: #333;
+    --text-light: #777;
+    --white: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+body {
+    background-color: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3. MUUNDO MKUU (Container) */
+.main-container {
+    background: var(--white);
+    width: 90%;
+    max-width: 900px;
+    height: 80vh; /* Urefu wa kutosha */
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden; /* Ficha vitu vilivyozidi */
+    box-shadow: var(--shadow);
+}
+
+/* 4. UPANDE WA BRAND (Kushoto - Blue) */
+.brand-section {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Hii inaficha upande wa bluu kwenye simu ndogo ili fomu ionekane vizuri */
+@media (max-width: 768px) {
+    .brand-section {
+        display: none; 
+    }
+    .main-container {
+        height: auto;
+        min-height: 70vh;
+    }
+}
+
+.brand-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.big-icon {
+    font-size: 5rem;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* 5. UPANDE WA FOMU (Kulia) */
+.form-section {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--white);
+    overflow-y: auto; /* Ruhusu kushuka chini kama fomu ni ndefu */
+}
+
+/* Vichwa vya Kubadilisha (Tabs) */
+.auth-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    background: #f1f3f6;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--white);
+    color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Input Styles */
+.auth-form h2 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.text-muted {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.input-group:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+}
+
+.input-group i {
+    color: var(--text-light);
+    margin-right: 10px;
+}
+
+.input-group input, .input-group select {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
+/* Buttons */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.forgot-pass {
+    text-align: center;
+    margin-top: 15px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.forgot-pass:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+/* --- DASHBOARD STYLES (Ongeza hizi chini) --- */
+
+/* Navigation ya Chini (Bottom Nav) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-item {
+    color: var(--text-light);
+    text-align: center;
+    font-size: 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Eneo la Katikati (Content Area) */
+.dashboard-container {
+    padding: 20px;
+    padding-bottom: 80px; /* Nafasi ya bottom nav */
+    max-width: 600px;
+    margin: 0 auto;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-pic-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Cards (Viboksi) */
+.card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Button kubwa ya Scan */
+.scan-btn-large {
+    background: var(--primary-color);
+    color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    box-shadow: 0 10px 25px rgba(13, 71, 161, 0.3);
+    border: none;
+    animation: pulse 2s infinite;
+}
+
+.scan-btn-large i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(13, 71, 161, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 71, 161, 0); }
+}
+
+/* Classmates List */
+.student-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.student-info {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.whatsapp-btn {
+    color: #25D366;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
